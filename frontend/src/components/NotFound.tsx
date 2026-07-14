@@ -1,17 +1,4 @@
-const REGIONS = ["NA", "EU", "KR", "BR", "LAN", "LAS", "OCE", "TR", "RU", "JP"];
-
-const REGION_LABEL: Record<string, string> = {
-  NA: "North America",
-  EU: "Europe",
-  KR: "Korea",
-  BR: "Brazil",
-  LAN: "Latin America North",
-  LAS: "Latin America South",
-  OCE: "Oceania",
-  TR: "Turkey",
-  RU: "Russia",
-  JP: "Japan",
-};
+import { REGIONS, REGION_LABEL } from "../data/constraints";
 
 interface NotFoundProps {
   query: string;

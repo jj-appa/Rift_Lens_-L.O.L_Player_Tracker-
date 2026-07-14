@@ -1,4 +1,4 @@
-const REGIONS = ["NA", "EU", "KR", "BR", "LAN", "LAS", "OCE", "TR", "RU", "JP"];
+import { REGIONS } from "../data/constraints";
 
 interface SearchBarProps {
   region: string;
@@ -54,10 +54,7 @@ export default function SearchBar({
         className={`flex-1 bg-slate-800 px-4 ${inputPy} text-sm text-slate-100 placeholder-slate-500 focus:outline-none min-w-0`}
       />
 
-      <button
-        type="submit"
-        className={`btn-primary ${btnPx}`}
-      >
+      <button type="submit" className={`btn-primary ${btnPx}`}>
         Search
       </button>
     </form>
