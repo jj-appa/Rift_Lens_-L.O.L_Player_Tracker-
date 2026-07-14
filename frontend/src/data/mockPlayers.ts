@@ -50,6 +50,8 @@ export const MOCK_PLAYERS: Record<string, Player> = {
         champion: "Tahm Kench",
         kda: { k: 3, d: 8, a: 10 },
         placement: "#5 (Team Poros)",
+        cs: 142,
+        dmg: 18400,
       },
       {
         id: 2,
@@ -60,6 +62,8 @@ export const MOCK_PLAYERS: Record<string, Player> = {
         champion: "Braum",
         kda: { k: 1, d: 3, a: 18 },
         placement: "",
+        cs: 39,
+        dmg: 9800,
       },
       {
         id: 3,
@@ -70,6 +74,8 @@ export const MOCK_PLAYERS: Record<string, Player> = {
         champion: "Malphite",
         kda: { k: 5, d: 6, a: 7 },
         placement: "",
+        cs: 187,
+        dmg: 21600,
       },
       {
         id: 4,
@@ -80,6 +86,8 @@ export const MOCK_PLAYERS: Record<string, Player> = {
         champion: "Lucian",
         kda: { k: 9, d: 4, a: 6 },
         placement: "",
+        cs: 264,
+        dmg: 41300,
       },
       {
         id: 5,
@@ -90,6 +98,8 @@ export const MOCK_PLAYERS: Record<string, Player> = {
         champion: "Tahm Kench",
         kda: { k: 0, d: 2, a: 14 },
         placement: "",
+        cs: 118,
+        dmg: 12100,
       },
       {
         id: 6,
@@ -100,6 +110,8 @@ export const MOCK_PLAYERS: Record<string, Player> = {
         champion: "Braum",
         kda: { k: 4, d: 1, a: 11 },
         placement: "#1 (Team Furries)",
+        cs: 61,
+        dmg: 15200,
       },
     ],
   },

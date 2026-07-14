@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,7 +7,7 @@
 @layer components {
   /* ── Cards ── */
   .card {
-    @apply bg-slate-800 rounded-xl overflow-hidden;
+    @apply bg-slate-900/80 border border-slate-800 rounded-lg overflow-hidden;
   }
 
   .card-body {
@@ -13,33 +15,33 @@
   }
 
   .card-section-header {
-    @apply text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3;
+    @apply font-display text-xs font-semibold text-slate-500 uppercase tracking-[0.15em] mb-3 flex items-center gap-1.5;
   }
 
   /* ── Buttons ── */
 
   /* Flush bottom "Show more / Show less" button shared by RankCard, ChampionMastery, RecentGames */
   .btn-expand {
-    @apply w-full py-2 text-sm text-slate-400 hover:text-slate-200
-           bg-slate-700/40 hover:bg-slate-700
-           transition-colors border-t border-slate-700/50;
+    @apply w-full py-2 text-sm text-slate-500 hover:text-teal-300
+           bg-slate-900/60 hover:bg-slate-800/80
+           transition-colors border-t border-slate-800;
   }
 
-  /* Yellow search/submit button */
+  /* Gold search/submit button */
   .btn-primary {
-    @apply bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-500
+    @apply bg-amber-400 hover:bg-amber-300 active:bg-amber-500
            text-slate-900 font-bold text-sm transition-colors flex-shrink-0;
   }
 
-  /* Blue action button (e.g. Update profile) */
+  /* Teal action button (e.g. Update profile) */
   .btn-secondary {
-    @apply bg-blue-600 hover:bg-blue-500 text-white
+    @apply bg-teal-600 hover:bg-teal-500 text-white
            text-sm font-semibold py-1.5 rounded-lg transition-colors;
   }
 
   /* ── Stat text ── */
   .stat-label {
-    @apply text-xs text-slate-400;
+    @apply text-xs text-slate-500;
   }
 
   .stat-value {
@@ -48,7 +50,7 @@
 
   /* ── Avatar / icon placeholder ── */
   .avatar-placeholder {
-    @apply bg-slate-700 rounded-full flex items-center justify-center flex-shrink-0;
+    @apply bg-slate-800 border border-slate-700/60 rounded-full flex items-center justify-center flex-shrink-0;
   }
 }
 
@@ -63,6 +65,7 @@ body,
 body {
   font-family: Inter, system-ui, sans-serif;
   line-height: 1.5;
-  background: #0b132b;
+  background: radial-gradient(circle at 20% -10%, #101a2e 0%, #060910 55%, #030509 100%);
+  background-attachment: fixed;
   color: #dbe2ef;
 }

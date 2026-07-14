@@ -17,7 +17,6 @@ ROUTING: dict[str, str] = {
     "RU": "EUROPE",
     "JP1": "ASIA",
     "KR": "ASIA",
-    "OC1": "SEA",
 }
 
 # Maps region codes to Riot's platform hosts (used by LoL-specific endpoints,
@@ -28,11 +27,27 @@ PLATFORM_ROUTING: dict[str, str] = {
     "BR1": "br1",
     "JP1": "jp1",
     "KR": "kr",
-    "OC1": "oc1",
     "RU": "ru",
 }
 
-app = FastAPI(title="LOL Player Tracker API")
+def split_riot_id(raw: str) -> tuple[str, str]:
+    """Clean up a combined 'GameName#TagLine' search string into its two parts."""
+    cleaned = raw.replace(" ", "")
+    if "#" not in cleaned:
+        raise HTTPException(
+            status_code=400,
+            detail="Riot ID must be in the form GameName#TagLine",
+        )
+    game_name, tag_line = cleaned.split("#", 1)
+    if not game_name or not tag_line:
+        raise HTTPException(
+            status_code=400,
+            detail="Riot ID must include both a game name and a tag line",
+        )
+    return game_name, tag_line
+
+
+app = FastAPI(title="Rift Lens API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -49,10 +64,11 @@ def health_check():
 # Step 1: PUUID Getter — checks if player riot account exists by gameName + tagLine
 @app.get("/api/puuid")
 async def get_puuid(
-    gameName: str = Query(..., description="Riot game name"),
-    tagLine: str = Query(..., description="Riot tag line (without the leading #)"),
-    region: str = Query(..., description="Region code: NA1, EUW1, BR1, JP1, KR, OC1, or RU"),
+    riotId: str = Query(..., description="Combined Riot ID in the form GameName#TagLine"),
+    region: str = Query(..., description="Region code: NA1, EUW1, BR1, JP1, KR, or RU"),
 ):
+    gameName, tagLine = split_riot_id(riotId)
+
     routing = ROUTING.get(region.upper())
     if not routing:
         raise HTTPException(
@@ -65,6 +81,7 @@ async def get_puuid(
 
     try:
         async with httpx.AsyncClient() as client:
+            #Get account by riot ID
             resp = await client.get(
                 f"{base_url}/riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}",
                 headers=headers,
@@ -93,7 +110,7 @@ async def get_puuid(
 @app.get("/api/player")
 async def get_player(
     puuid: str = Query(..., description="Player Universal Unique Identifier (78 chars)"),
-    region: str = Query(..., description="Region code: NA1, EUW1, BR1, JP1, KR, OC1, or RU"),
+    region: str = Query(..., description="Region code: NA1, EUW1, BR1, JP1, KR, or RU"),
     game: str = Query(default="lol", description="Game to lookup active region"),
 ):
     routing = ROUTING.get(region.upper())
@@ -136,7 +153,7 @@ async def get_player(
 @app.get("/api/ranked")
 async def get_ranked_info(
     puuid: str = Query(..., description="Player Universal Unique Identifier (78 chars)"),
-    region: str = Query(..., description="Region code: NA1, EUW1, BR1, JP1, KR, OC1, or RU"),
+    region: str = Query(..., description="Region code: NA1, EUW1, BR1, JP1, KR, or RU"),
 ):
     platform = PLATFORM_ROUTING.get(region.upper())
     if not platform:
@@ -184,7 +201,7 @@ async def get_ranked_info(
 @app.get("/api/match-history")
 async def get_match_history(
     puuid: str = Query(..., description="Player Universal Unique Identifier (78 chars)"),
-    region: str = Query(..., description="Region code: NA1, EUW1, BR1, JP1, KR, OC1, or RU"),
+    region: str = Query(..., description="Region code: NA1, EUW1, BR1, JP1, KR, or RU"),
     start: int = Query(default=0, ge=0, description="Index of the first match to return"),
     count: int = Query(default=10, ge=1, le=100, description="Number of match IDs to return"),
 ):
@@ -225,7 +242,7 @@ async def get_match_history(
 @app.get("/api/match/{match_id}")
 async def get_match_details(
     match_id: str,
-    region: str = Query(..., description="Region code: NA1, EUW1, BR1, JP1, KR, OC1, or RU"),
+    region: str = Query(..., description="Region code: NA1, EUW1, BR1, JP1, KR, or RU"),
 ):
     routing = ROUTING.get(region.upper())
     if not routing:
@@ -280,7 +297,7 @@ async def get_match_details(
 async def get_champion_mastery(
     puuid: str = Query(..., description="Player Universal Unique Identifier (78 chars)"),
     count: int = Query(default=3, description="Top 3 champion masteries to return"),
-    region: str = Query(..., description="Region code: NA1, EUW1, BR1, JP1, KR, OC1, or RU"),
+    region: str = Query(..., description="Region code: NA1, EUW1, BR1, JP1, KR, or RU"),
 ):
     platform = PLATFORM_ROUTING.get(region.upper())
     if not platform:

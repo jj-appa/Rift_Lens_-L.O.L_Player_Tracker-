@@ -1,4 +1,4 @@
-# L.O.L-Player-Tracker
+# Rift Lens
 
 League of Legends player tracker
 
@@ -34,7 +34,6 @@ uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 - Add Riot Games API integration in `backend/python/app/main.py`.
 - Connect the React frontend to the backend with `fetch` or a data library.
 - Replace sample routes with actual player lookup and match data endpoints.
-
 - Add tag Line on frontend
 - create gamername + tagLine for backend to use
 - Finish history layout

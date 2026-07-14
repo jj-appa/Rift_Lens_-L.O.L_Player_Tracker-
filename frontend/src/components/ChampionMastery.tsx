@@ -17,11 +17,13 @@ export default function ChampionMastery({ mastery, onShowMore }: ChampionMastery
   return (
     <div className="card">
       <div className="card-body">
-        <h3 className="card-section-header">Champion Mastery</h3>
+        <h3 className="card-section-header">
+          <span className="text-amber-400/80">⚔️</span> Champion Mastery
+        </h3>
         <div className="flex flex-col gap-2.5 overflow-hidden" style={{ maxHeight: `${MAX_SHOWN * 44}px` }}>
           {visible.map((m) => (
             <div key={m.champion} className="flex items-center gap-2">
-              <div className="avatar-placeholder w-8 h-8 text-xs font-bold text-yellow-400">
+              <div className="avatar-placeholder w-8 h-8 text-xs font-bold text-amber-400">
                 {m.level}
               </div>
               <div className="min-w-0">

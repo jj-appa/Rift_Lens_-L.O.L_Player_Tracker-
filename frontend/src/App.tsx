@@ -7,22 +7,35 @@ import ProfileSidebar from "./components/ProfileSidebar";
 import RecentGames from "./components/RecentGames";
 import NotFound from "./components/NotFound";
 import { MOCK_PLAYERS } from "./data/mockPlayers";
+import { parseRiotId } from "./utils/riotId";
 
 const TABS = ["Summary", "Mastery", "Champions"];
 
 export default function App() {
   const [region, setRegion] = useState("NA");
   const [query, setQuery] = useState("");
+  const [searchedQuery, setSearchedQuery] = useState("");
   const [player, setPlayer] = useState<Player | null>(null);
   const [notFound, setNotFound] = useState(false);
   const [activeTab, setActiveTab] = useState("Summary");
 
   function handleSearch() {
     if (!query.trim()) return;
-    // TODO: replace with real API call
-    const match = MOCK_PLAYERS[query.trim().toLowerCase()];
+    setSearchedQuery(query.trim());
+    // TODO: replace with real API call — pass gameName + tagLine to /api/puuid
+    const { gameName, tagLine } = parseRiotId(query);
+    if (!gameName) {
+      setPlayer(null);
+      setNotFound(true);
+      return;
+    }
+
+    const match = Object.values(MOCK_PLAYERS).find(
+      (p) => p.name.replace(/\s+/g, "").toLowerCase() === gameName.toLowerCase()
+    );
+
     if (match) {
-      setPlayer({ ...match, name: query.trim(), region });
+      setPlayer({ ...match, name: gameName, tag: tagLine || match.tag, region });
       setNotFound(false);
       setActiveTab("Summary");
     } else {
@@ -37,7 +50,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100">
+    <div className="min-h-screen bg-transparent text-slate-100">
       <NavBar
         onLogoClick={handleLogoClick}
         showSearch={!!player || notFound}
@@ -51,7 +64,7 @@ export default function App() {
       {/* ── Not found ── */}
       {notFound && !player && (
         <NotFound
-          query={query}
+          query={searchedQuery}
           region={region}
           setRegion={setRegion}
           onRetry={handleSearch}
@@ -60,14 +73,13 @@ export default function App() {
 
       {/* ── Homepage ── */}
       {!player && !notFound && (
-        <div className="flex flex-col items-center bg-gradient-to-b from-slate-900 to-slate-800 min-h-[calc(100vh-57px)]">
+        <div className="flex flex-col items-center min-h-[calc(100vh-57px)]">
           <main className="flex flex-col items-center justify-center flex-1 w-full px-4 py-20">
-            <h1 className="text-4xl sm:text-5xl font-extrabold mb-3 text-center">
-              League of Legends
-              <span className="block text-yellow-400">Player Tracker</span>
+            <h1 className="font-display text-4xl sm:text-5xl font-bold mb-3 text-center tracking-wide text-amber-400">
+              Rift Lens
             </h1>
             <p className="text-slate-400 mb-10 text-center max-w-sm">
-              Search any summoner to view their stats, rank, and match history.
+              Search any League of Legends summoner to view their stats, rank, and match history.
             </p>
             <div className="w-full max-w-xl">
               <SearchBar
@@ -97,7 +109,7 @@ export default function App() {
             <div className="flex-1 min-w-0 w-full">
               {activeTab === "Summary" && <RecentGames player={player} />}
               {activeTab !== "Summary" && (
-                <div className="bg-slate-800 rounded-xl p-10 text-center text-slate-500">
+                <div className="card p-10 text-center text-slate-500">
                   <p className="text-4xl mb-3">🚧</p>
                   <p className="font-medium">{activeTab} — coming soon</p>
                 </div>

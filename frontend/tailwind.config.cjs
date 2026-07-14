@@ -4,7 +4,12 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Rajdhani', 'system-ui', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 };

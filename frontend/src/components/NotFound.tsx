@@ -18,7 +18,7 @@ export default function NotFound({
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-120px)] px-4 text-center">
       <h2 className="text-xl sm:text-2xl font-bold text-slate-100 mb-3">
-        No search results for "<span className="text-blue-400">{query}</span>"
+        No search results for "<span className="text-teal-400">{query}</span>"
         in the {regionLabel} region.
       </h2>
 
@@ -37,7 +37,7 @@ export default function NotFound({
               setRegion(e.target.value);
               onRetry();
             }}
-            className="appearance-none bg-slate-700 hover:bg-slate-600 text-slate-100 font-semibold pl-3 pr-7 py-1.5 rounded-lg border border-slate-600 focus:outline-none focus:border-yellow-400 transition-colors cursor-pointer text-sm"
+            className="appearance-none bg-slate-800 hover:bg-slate-700 text-slate-100 font-semibold pl-3 pr-7 py-1.5 rounded-lg border border-slate-700 focus:outline-none focus:border-amber-400 transition-colors cursor-pointer text-sm"
           >
             {REGIONS.map((r) => (
               <option key={r} value={r}>

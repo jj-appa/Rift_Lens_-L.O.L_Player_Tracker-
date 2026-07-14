@@ -29,6 +29,8 @@ export interface GameEntry {
   champion: string;
   kda: { k: number; d: number; a: number };
   placement: string;
+  cs?: number;
+  dmg?: number;
 }
 
 export interface Player {

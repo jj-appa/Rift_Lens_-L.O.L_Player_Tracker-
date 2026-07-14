@@ -8,7 +8,7 @@ const TIER_COLOR: Record<string, string> = {
   Gold: "text-yellow-400",
   Platinum: "text-teal-400",
   Emerald: "text-emerald-400",
-  Diamond: "text-blue-400",
+  Diamond: "text-teal-400",
   Master: "text-purple-400",
   Grandmaster: "text-red-400",
   Challenger: "text-yellow-300",
@@ -36,11 +36,13 @@ export default function RankCard({ label, tier, division, lp, wins, losses, hist
   return (
     <div className="card">
       <div className="card-body">
-        <h3 className="card-section-header">{label}</h3>
+        <h3 className="card-section-header">
+          <span className="text-amber-400/80">🏆</span> {label}
+        </h3>
 
         {isUnranked ? (
           <div className="flex flex-col items-center justify-center py-5 gap-2">
-            <div className="w-10 h-10 rounded-full border-2 border-slate-600 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full border-2 border-slate-700 flex items-center justify-center">
               <span className="text-slate-500 font-bold text-lg leading-none">!</span>
             </div>
             <p className="stat-label">There are no results recorded.</p>
@@ -48,7 +50,7 @@ export default function RankCard({ label, tier, division, lp, wins, losses, hist
         ) : (
           <>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-slate-700 rounded-lg flex items-center justify-center text-xl">
+              <div className="w-10 h-10 bg-slate-800 border border-slate-700/60 rounded-lg flex items-center justify-center text-xl">
                 🏅
               </div>
               <div>
@@ -61,14 +63,14 @@ export default function RankCard({ label, tier, division, lp, wins, losses, hist
 
             {wr != null && (
               <div className="flex gap-3 mt-2">
-                <span className="stat-label text-blue-400">{wins}W</span>
+                <span className="stat-label text-teal-400">{wins}W</span>
                 <span className="stat-label text-red-400">{losses}L</span>
                 <span className="stat-label">{wr}% WR</span>
               </div>
             )}
 
             {expanded && (
-              <div className="mt-3 flex flex-col gap-2 border-t border-slate-700/50 pt-3">
+              <div className="mt-3 flex flex-col gap-2 border-t border-slate-800 pt-3">
                 <div className="flex justify-between">
                   <span className="stat-label">Total Games</span>
                   <span className="stat-value">{totalGames}</span>
@@ -77,17 +79,17 @@ export default function RankCard({ label, tier, division, lp, wins, losses, hist
                   <span className="stat-label">Win Rate</span>
                   <span className="stat-value">{winBarPct}%</span>
                 </div>
-                <div className="w-full h-1.5 bg-slate-700 rounded-full overflow-hidden">
-                  <div className="h-full bg-blue-500 rounded-full" style={{ width: `${winBarPct}%` }} />
+                <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                  <div className="h-full bg-teal-500 rounded-full" style={{ width: `${winBarPct}%` }} />
                 </div>
                 <div className="flex justify-between mb-1">
-                  <span className="stat-label text-blue-400">{wins}W</span>
+                  <span className="stat-label text-teal-400">{wins}W</span>
                   <span className="stat-label text-red-400">{losses}L</span>
                 </div>
 
                 {history && history.length > 0 && (
-                  <div className="border-t border-slate-700/50 pt-2">
-                    <div className="grid grid-cols-3 pb-1 mb-1 border-b border-slate-700/40">
+                  <div className="border-t border-slate-800 pt-2">
+                    <div className="grid grid-cols-3 pb-1 mb-1 border-b border-slate-800/70">
                       <span className="stat-label uppercase tracking-wider">Season</span>
                       <span className="stat-label uppercase tracking-wider">Tier</span>
                       <span className="stat-label uppercase tracking-wider text-right">LP</span>

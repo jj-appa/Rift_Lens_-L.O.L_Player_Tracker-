@@ -11,18 +11,18 @@ export default function ProfileSidebar({ player, onShowMoreMastery }: ProfileSid
   return (
     <aside className="w-full lg:w-60 lg:flex-shrink-0 flex flex-col gap-4">
       {/* Profile card */}
-      <div className="bg-slate-800 rounded-xl p-4 flex flex-col gap-3">
+      <div className="card p-4 flex flex-col gap-3">
         <div className="flex items-center gap-3">
           <div className="relative">
-            <div className="w-16 h-16 rounded-xl bg-slate-700 flex items-center justify-center text-3xl select-none">
+            <div className="w-16 h-16 rounded-xl bg-slate-800 border border-slate-700/60 flex items-center justify-center text-3xl select-none">
               🎮
             </div>
-            <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-slate-600 text-xs px-2 rounded-md font-bold whitespace-nowrap">
+            <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-slate-800 border border-slate-700/60 text-amber-400 text-xs px-2 rounded-md font-bold whitespace-nowrap">
               {player.level}
             </span>
           </div>
           <div className="min-w-0">
-            <p className="font-bold text-base leading-tight truncate">
+            <p className="font-display font-bold text-base leading-tight truncate tracking-wide">
               {player.name}
             </p>
             <p className="text-slate-400 text-sm">#{player.tag}</p>

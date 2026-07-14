@@ -26,13 +26,13 @@ export default function SearchBar({
         e.preventDefault();
         onSearch();
       }}
-      className="flex rounded-xl overflow-hidden border border-slate-600 focus-within:border-yellow-400 transition-colors shadow-lg w-full"
+      className="flex rounded-lg overflow-hidden border border-slate-700 focus-within:border-amber-400 transition-colors shadow-lg w-full"
     >
       <div className="relative flex-shrink-0">
         <select
           value={region}
           onChange={(e) => setRegion(e.target.value)}
-          className="h-full bg-slate-700 text-slate-100 text-sm font-semibold px-3 pr-7 appearance-none cursor-pointer focus:outline-none border-r border-slate-600 hover:bg-slate-600 transition-colors"
+          className="h-full bg-slate-800 text-slate-100 text-sm font-semibold px-3 pr-7 appearance-none cursor-pointer focus:outline-none border-r border-slate-700 hover:bg-slate-700 transition-colors"
           aria-label="Select region"
         >
           {REGIONS.map((r) => (
@@ -50,8 +50,8 @@ export default function SearchBar({
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search summoner name..."
-        className={`flex-1 bg-slate-800 px-4 ${inputPy} text-sm text-slate-100 placeholder-slate-500 focus:outline-none min-w-0`}
+        placeholder="Add Gamertag + #Tagline"
+        className={`flex-1 bg-slate-900 px-4 ${inputPy} text-sm text-slate-100 placeholder-slate-500 focus:outline-none min-w-0`}
       />
 
       <button type="submit" className={`btn-primary ${btnPx}`}>

@@ -20,12 +20,15 @@ export default function NavBar({
   onSearch,
 }: NavBarProps) {
   return (
-    <header className="sticky top-0 z-20 bg-slate-900/95 backdrop-blur border-b border-slate-700/50 px-4 sm:px-6 py-3 flex flex-col items-start sm:flex-row sm:items-center gap-2 sm:gap-10">
+    <header className="sticky top-0 z-20 bg-slate-950/95 backdrop-blur border-b border-slate-800 px-4 sm:px-6 py-3 flex flex-col items-start sm:flex-row sm:items-center gap-2 sm:gap-10">
       <button
         onClick={onLogoClick}
-        className="font-bold text-yellow-400 text-lg tracking-wide whitespace-nowrap hover:text-yellow-300 transition-colors"
+        className="group flex items-center gap-2 whitespace-nowrap"
       >
-        LOL Tracker
+        <span className="w-2.5 h-2.5 rotate-45 bg-amber-400 group-hover:bg-amber-300 transition-colors flex-shrink-0" />
+        <span className="font-display font-bold text-slate-100 group-hover:text-amber-300 text-lg tracking-[0.2em] uppercase transition-colors">
+          Rift Lens
+        </span>
       </button>
 
       {showSearch && setRegion && setQuery && onSearch && (

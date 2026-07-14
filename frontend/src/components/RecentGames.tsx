@@ -5,6 +5,17 @@ const DEFAULT_SHOWN = 3;
 const RADIUS = 28;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
+function fmtDmg(n?: number) {
+  if (n == null) return "—";
+  return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : `${n}`;
+}
+
+function ratioColor(ratio: number) {
+  if (ratio >= 6) return "text-amber-400";
+  if (ratio >= 3) return "text-teal-400";
+  return "text-slate-300";
+}
+
 interface RecentGamesProps {
   player: Player;
 }
@@ -37,7 +48,9 @@ export default function RecentGames({ player }: RecentGamesProps) {
   return (
     <div className="card">
       <div className="card-body">
-        <h2 className="font-semibold mb-4">Recent Games</h2>
+        <h2 className="card-section-header">
+          <span className="text-amber-400/80">🕐</span> Recent Games
+        </h2>
 
         {!hasGames ? (
           /* Empty state */
@@ -58,7 +71,7 @@ export default function RecentGames({ player }: RecentGamesProps) {
             <div className="flex items-center gap-5 mb-4 p-3">
               <div className="relative flex-shrink-0">
                 <svg width="80" height="80" viewBox="0 0 80 80">
-                  <circle cx="40" cy="40" r={RADIUS} fill="none" stroke="#334155" strokeWidth="10" />
+                  <circle cx="40" cy="40" r={RADIUS} fill="none" stroke="#1e293b" strokeWidth="10" />
                   <circle
                     cx="40" cy="40" r={RADIUS}
                     fill="none" stroke="#ef4444" strokeWidth="10"
@@ -69,7 +82,7 @@ export default function RecentGames({ player }: RecentGamesProps) {
                   />
                   <circle
                     cx="40" cy="40" r={RADIUS}
-                    fill="none" stroke="#3b82f6" strokeWidth="10"
+                    fill="none" stroke="#2dd4bf" strokeWidth="10"
                     strokeDasharray={`${winArc} ${CIRCUMFERENCE}`}
                     strokeDashoffset="0"
                     transform="rotate(-90 40 40)"
@@ -83,7 +96,7 @@ export default function RecentGames({ player }: RecentGamesProps) {
               <div className="flex flex-col gap-0.5">
                 <p className="text-xs text-slate-400">
                   <span className="text-slate-200 font-medium">{total}G</span>{" "}
-                  <span className="text-blue-400">{wins}W</span>{" "}
+                  <span className="text-teal-400">{wins}W</span>{" "}
                   <span className="text-red-400">{losses}L</span>
                 </p>
                 <p className="text-xs text-slate-500">
@@ -97,41 +110,60 @@ export default function RecentGames({ player }: RecentGamesProps) {
             {/* Game list */}
             <div
               className="flex flex-col gap-2 overflow-hidden"
-              style={!expanded ? { maxHeight: `${DEFAULT_SHOWN * 85}px` } : undefined}
+              style={!expanded ? { maxHeight: `${DEFAULT_SHOWN * 68}px` } : undefined}
             >
               {visible.map((game) => {
                 const isWin = game.result === "Victory";
-                const ratio = ((game.kda.k + game.kda.a) / Math.max(game.kda.d, 1)).toFixed(2);
+                const ratio = (game.kda.k + game.kda.a) / Math.max(game.kda.d, 1);
 
                 return (
                   <div
                     key={game.id}
-                    className={`rounded-lg p-3 flex items-center gap-4 border-l-4 ${
-                      isWin ? "bg-blue-900/20 border-blue-500" : "bg-red-900/20 border-red-500"
+                    className={`rounded-lg pl-2.5 pr-3 py-2.5 flex items-center gap-3 border-l-4 ${
+                      isWin ? "bg-teal-900/10 border-teal-500" : "bg-red-900/10 border-red-500"
                     }`}
                   >
-                    <div className="w-12 h-12 bg-slate-700 rounded-full flex items-center justify-center text-2xl flex-shrink-0">
+                    <span
+                      className={`w-6 h-6 rounded flex items-center justify-center text-[11px] font-bold text-white flex-shrink-0 ${
+                        isWin ? "bg-teal-600" : "bg-red-600"
+                      }`}
+                    >
+                      {isWin ? "W" : "L"}
+                    </span>
+
+                    <div className="w-10 h-10 bg-slate-800 border border-slate-700/60 rounded-md flex items-center justify-center text-xl flex-shrink-0">
                       🐱
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className={`text-xs font-bold ${isWin ? "text-blue-400" : "text-red-400"}`}>
-                          {game.result}
-                        </span>
-                        <span className="text-xs text-slate-400">{game.mode}</span>
-                        <span className="text-xs text-slate-600">•</span>
-                        <span className="text-xs text-slate-500">{game.timeAgo}</span>
-                      </div>
-                      <p className="font-semibold text-sm mt-0.5">{game.champion}</p>
-                      <p className="text-xs text-slate-400">{game.duration}</p>
+
+                    <div className="min-w-0 w-28 flex-shrink-0">
+                      <p className="font-semibold text-sm truncate">{game.champion}</p>
+                      <p className="text-xs text-slate-500 uppercase tracking-wide truncate">{game.mode}</p>
                     </div>
-                    <div className="text-right flex-shrink-0">
-                      <p className="font-bold text-sm">
-                        {game.kda.k}/{game.kda.d}/{game.kda.a}
+
+                    <div className="text-center flex-shrink-0 w-16">
+                      <p className={`font-display text-base font-bold leading-tight ${ratioColor(ratio)}`}>
+                        {ratio.toFixed(2)}
                       </p>
-                      <p className="text-xs text-slate-400">{ratio}:1 KDA</p>
+                      <p className="text-xs text-slate-500">
+                        {game.kda.k}/<span className="text-red-400">{game.kda.d}</span>/{game.kda.a}
+                      </p>
+                    </div>
+
+                    <div className="text-center flex-shrink-0 w-14 hidden sm:block">
+                      <p className="text-sm font-medium text-slate-200">{game.cs ?? "—"}</p>
+                      <p className="text-[10px] text-slate-500 uppercase tracking-wide">CS</p>
+                    </div>
+
+                    <div className="text-center flex-shrink-0 w-14 hidden sm:block">
+                      <p className="text-sm font-medium text-slate-200">{fmtDmg(game.dmg)}</p>
+                      <p className="text-[10px] text-slate-500 uppercase tracking-wide">DMG</p>
+                    </div>
+
+                    <div className="text-right flex-1 min-w-0">
+                      <p className="text-sm text-slate-300 truncate">{game.duration}</p>
+                      <p className="text-xs text-slate-500 truncate">{game.timeAgo}</p>
                       {game.placement && (
-                        <p className="text-xs text-slate-500 mt-0.5">{game.placement}</p>
+                        <p className="text-xs text-slate-600 truncate">{game.placement}</p>
                       )}
                     </div>
                   </div>
