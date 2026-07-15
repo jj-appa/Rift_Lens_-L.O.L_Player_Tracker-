@@ -31,9 +31,7 @@ uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 
 ## Next Steps
 
-- Add Riot Games API integration in `backend/python/app/main.py`.
 - Connect the React frontend to the backend with `fetch` or a data library.
 - Replace sample routes with actual player lookup and match data endpoints.
-- Add tag Line on frontend
-- create gamername + tagLine for backend to use
-- Finish history layout
+- Create Docker and containerize project
+- Set Up a basic CI/CD
