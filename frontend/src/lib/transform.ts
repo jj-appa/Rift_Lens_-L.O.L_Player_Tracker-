@@ -1,13 +1,15 @@
 import type { GameEntry, MasteryEntry, RankInfo } from "../types/player";
 import { getChampionName } from "../data/champions";
 import { getQueueLabel } from "../data/queues";
-import type {
-  MasteryEntryResponse,
-  MatchDetails,
-  RankedEntry,
-} from "./api";
+import type { MasteryEntryResponse, MatchDetails, RankedEntry } from "./api";
 
-const UNRANKED: RankInfo = { tier: "Unranked", division: "", lp: 0, wins: 0, losses: 0 };
+const UNRANKED: RankInfo = {
+  tier: "Unranked",
+  division: "",
+  lp: 0,
+  wins: 0,
+  losses: 0,
+};
 
 function titleCase(value: string): string {
   return value.charAt(0) + value.slice(1).toLowerCase();
@@ -36,7 +38,9 @@ export function transformRankedEntries(entries: RankedEntry[]): {
   };
 }
 
-export function transformMastery(masteries: MasteryEntryResponse[]): MasteryEntry[] {
+export function transformMastery(
+  masteries: MasteryEntryResponse[],
+): MasteryEntry[] {
   return masteries.map((m) => ({
     champion: getChampionName(m.championId),
     points: m.championPoints,
@@ -58,7 +62,8 @@ function formatTimeAgo(timestampMs: number): string {
   const week = 7 * day;
   const month = 30 * day;
 
-  if (diffMs < hour) return `${Math.max(1, Math.floor(diffMs / minute))} minutes ago`;
+  if (diffMs < hour)
+    return `${Math.max(1, Math.floor(diffMs / minute))} minutes ago`;
   if (diffMs < day) return `${Math.floor(diffMs / hour)} hours ago`;
   if (diffMs < week) return `${Math.floor(diffMs / day)} days ago`;
   if (diffMs < month) return `${Math.floor(diffMs / week)} weeks ago`;
@@ -70,7 +75,7 @@ function formatTimeAgo(timestampMs: number): string {
 export function transformMatch(
   match: MatchDetails,
   puuid: string,
-  id: number
+  id: number,
 ): GameEntry | null {
   const participant = match.participants.find((p) => p.puuid === puuid);
   if (!participant) return null;
@@ -84,14 +89,23 @@ export function transformMatch(
     duration: formatDuration(match.gameDuration),
     timeAgo: formatTimeAgo(playedAt),
     champion: getChampionName(participant.championId),
-    kda: { k: participant.kills, d: participant.deaths, a: participant.assists },
-    placement: participant.subteamPlacement != null ? `#${participant.subteamPlacement}` : "",
+    kda: {
+      k: participant.kills,
+      d: participant.deaths,
+      a: participant.assists,
+    },
+    placement: participant.subteamPlacement
+      ? `#${participant.subteamPlacement}`
+      : "",
     cs: participant.totalMinionsKilled + participant.neutralMinionsKilled,
     dmg: participant.totalDamageDealtToChampions,
   };
 }
 
-export function transformMatches(matches: MatchDetails[], puuid: string): GameEntry[] {
+export function transformMatches(
+  matches: MatchDetails[],
+  puuid: string,
+): GameEntry[] {
   return matches
     .map((match, index) => transformMatch(match, puuid, index + 1))
     .filter((entry): entry is GameEntry => entry !== null);

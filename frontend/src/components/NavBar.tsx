@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 
 interface NavBarProps {
@@ -19,10 +20,15 @@ export default function NavBar({
   setQuery,
   onSearch,
 }: NavBarProps) {
+  const navigate = useNavigate();
+
   return (
     <header className="sticky top-0 z-20 bg-slate-950/95 backdrop-blur border-b border-slate-800 px-4 sm:px-6 py-3 flex flex-col items-start sm:flex-row sm:items-center gap-2 sm:gap-10">
       <button
-        onClick={onLogoClick}
+        onClick={() => {
+          navigate("/");
+          onLogoClick?.();
+        }}
         className="group flex items-center gap-2 whitespace-nowrap"
       >
         <span className="w-2.5 h-2.5 rotate-45 bg-gold-400 group-hover:bg-gold-300 transition-colors flex-shrink-0" />

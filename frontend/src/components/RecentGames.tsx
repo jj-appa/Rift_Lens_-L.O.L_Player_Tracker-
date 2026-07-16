@@ -117,7 +117,7 @@ export default function RecentGames({ player }: RecentGamesProps) {
                 return (
                   <div
                     key={game.id}
-                    className={`rounded-lg pl-2.5 pr-3 py-2.5 flex items-center gap-3 border-l-4 ${
+                    className={`rounded pl-2.5 pr-3 py-2.5 flex items-center gap-3 border-l-4 ${
                       isWin ? "bg-teal-900/10 border-teal-500" : "bg-red-900/10 border-red-500"
                     }`}
                   >

@@ -1,4 +1,5 @@
 import { ChevronRight, Shield, Target, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
 import { REGIONS, REGION_LABEL } from "../data/constraints";
 
 const GAME_MODES = [
@@ -79,9 +80,8 @@ export default function Footer() {
             </div>
 
             {/* About Project link */}
-            <a
-              href="#"
-              onClick={(e) => e.preventDefault()}
+            <Link
+              to="/about"
               className="inline-flex items-center gap-1.5 group w-fit"
               aria-label="About this project"
             >
@@ -92,10 +92,7 @@ export default function Footer() {
                 size={14}
                 className="text-gold-400/60 group-hover:text-slate-100/60 group-hover:translate-x-0.5 transition-all"
               />
-            </a>
-
-            {/* Divider */}
-            <div className="h-px w-full bg-gradient-to-r from-gold-400/40 via-gold-400/10 to-transparent" />
+            </Link>
 
             {/* Meta */}
             <div className="flex flex-col gap-1.5">
