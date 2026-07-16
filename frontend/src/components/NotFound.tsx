@@ -39,7 +39,7 @@ export default function NotFound({
               setRegion(e.target.value);
               onRetry();
             }}
-            className="appearance-none bg-slate-800 hover:bg-slate-700 text-slate-100 font-semibold tracking-wide pl-3 pr-7 py-1.5 rounded-lg border border-slate-700 focus:outline-none focus:border-gold-400 transition-colors cursor-pointer text-base"
+            className="select-gold pl-3 pr-7 py-1.5 rounded-lg border border-slate-700 focus:border-gold-400"
           >
             {REGIONS.map((r) => (
               <option key={r} value={r}>
@@ -47,9 +47,7 @@ export default function NotFound({
               </option>
             ))}
           </select>
-          <span className="pointer-events-none absolute right-2 text-slate-400 text-xs">
-            ▼
-          </span>
+          <span className="select-caret">▼</span>
         </div>
       </div>
     </div>

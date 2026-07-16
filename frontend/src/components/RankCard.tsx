@@ -83,7 +83,7 @@ export default function RankCard({ label, tier, division, lp, wins, losses, hist
         {!isUnranked && (
           <>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-slate-800 border border-slate-700/60 rounded-lg flex items-center justify-center">
+              <div className="avatar-placeholder w-10 h-10 rounded-lg">
                 <Medal className="text-gold-400" size={20} />
               </div>
               <div>

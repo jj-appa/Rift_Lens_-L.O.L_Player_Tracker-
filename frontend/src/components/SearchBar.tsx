@@ -32,7 +32,7 @@ export default function SearchBar({
         <select
           value={region}
           onChange={(e) => setRegion(e.target.value)}
-          className="h-full bg-slate-800 text-slate-100 text-base font-semibold tracking-wide px-3 pr-7 appearance-none cursor-pointer focus:outline-none border-r border-slate-700 hover:bg-slate-700 transition-colors"
+          className="select-gold h-full px-3 pr-7 border-r border-slate-700"
           aria-label="Select region"
         >
           {REGIONS.map((r) => (
@@ -41,9 +41,7 @@ export default function SearchBar({
             </option>
           ))}
         </select>
-        <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 text-xs">
-          ▼
-        </span>
+        <span className="select-caret top-1/2 -translate-y-1/2">▼</span>
       </div>
 
       <input

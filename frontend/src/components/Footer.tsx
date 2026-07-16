@@ -12,11 +12,7 @@ const GAME_MODES = [
 ];
 
 function FooterColumnHeader({ children }: { children: string }) {
-  return (
-    <div className="font-mono text-xs font-semibold text-gold-400 uppercase tracking-[0.25em] mb-4">
-      {children}
-    </div>
-  );
+  return <div className="eyebrow font-semibold tracking-[0.25em] mb-4">{children}</div>;
 }
 
 function FooterLinkList({ items }: { items: string[] }) {
@@ -67,7 +63,7 @@ export default function Footer() {
           <div className="flex flex-col gap-5">
             <div>
               <div className="flex items-center gap-2.5 mb-1">
-                <span className="w-3 h-3 rotate-45 bg-gold-400 flex-shrink-0" />
+                <span className="gold-diamond w-3 h-3" />
                 <span className="font-display font-bold text-2xl text-gold-400 tracking-[0.12em]">
                   Rift Lens
                 </span>
@@ -112,16 +108,14 @@ export default function Footer() {
 
             {/* Version tag */}
             <div className="mt-auto pt-2">
-              <span className="font-mono text-[11px] text-slate-600 uppercase tracking-widest">
-                v1.0.0 · Built with React &amp; FastAPI
-              </span>
+              <span className="fine-print">v1.0.0 · Built with React &amp; FastAPI</span>
             </div>
           </div>
         </div>
 
         {/* Bottom bar */}
         <div className="mt-10 pt-4 border-t border-slate-800/70 flex items-center justify-center">
-          <span className="font-mono text-[11px] text-slate-600 uppercase tracking-widest text-center">
+          <span className="fine-print text-center">
             © 2026 Rift Lens · Riot Games data used under Riot Games API Terms
             of Service
           </span>

@@ -82,10 +82,8 @@ const DATA_ROWS: [string, string][] = [
 function SectionHeader({ children }: { children: string }) {
   return (
     <div className="flex items-center gap-2.5 mb-8">
-      <span className="font-mono text-xs text-gold-400 uppercase tracking-[0.2em]">
-        {children}
-      </span>
-      <span className="w-2 h-2 rotate-45 bg-gold-400 flex-shrink-0" />
+      <span className="eyebrow">{children}</span>
+      <span className="gold-diamond w-2 h-2" />
     </div>
   );
 }
@@ -122,13 +120,11 @@ export default function AboutProject() {
               style={{ gridTemplateColumns: "1fr auto" }}
             >
               <div>
-                <div className="font-mono text-xs text-gold-400 uppercase tracking-[0.25em] mb-3">
+                <div className="eyebrow tracking-[0.25em] mb-3">
                   Project Overview
                 </div>
-                <h1 className="font-display font-bold text-4xl md:text-6xl text-slate-100 mb-4 leading-none tracking-tight">
-                  Rift
-                  <br />
-                  <span className="text-gold-400">Lens</span>
+                <h1 className="font-display font-bold text-4xl md:text-6xl text-gold-400 mb-4 leading-none tracking-tight">
+                  Rift Lens
                 </h1>
                 <p className="text-slate-400 text-base md:text-lg leading-relaxed max-w-xl">
                   A summoner analytics dashboard built on the Riot Games API.
@@ -154,15 +150,11 @@ export default function AboutProject() {
 
               {/* Version block */}
               <div className="hidden md:flex flex-col items-end justify-start gap-1 pt-2">
-                <span className="font-mono text-[10px] text-slate-600 uppercase tracking-widest">
-                  Version
-                </span>
-                <span className="font-display font-bold text-5xl text-gold-400/20 leading-none">
+                <span className="fine-print text-[10px]">Version</span>
+                <span className="font-display font-bold text-5xl text-gold-400/35 leading-none">
                   1.0
                 </span>
-                <span className="font-mono text-xs text-slate-500">
-                  July 2026
-                </span>
+                <span className="mono-caption">July 2026</span>
               </div>
             </div>
           </div>
@@ -176,10 +168,7 @@ export default function AboutProject() {
             {FEATURES.map((f) => {
               const Icon = f.icon;
               return (
-                <div
-                  key={f.title}
-                  className="card p-6 relative overflow-hidden group hover:border-gold-400/30 transition-colors"
-                >
+                <div key={f.title} className="card-hover p-6 relative group">
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity pointer-events-none"
                     style={{
@@ -188,7 +177,7 @@ export default function AboutProject() {
                   />
                   <div className="flex items-start gap-4">
                     <div
-                      className="w-10 h-10 rounded flex items-center justify-center shrink-0 mt-0.5"
+                      className="icon-chip w-10 h-10 mt-0.5"
                       style={{
                         background: `${f.color}15`,
                         border: `1px solid ${f.color}33`,
@@ -222,10 +211,10 @@ export default function AboutProject() {
                 return (
                   <div
                     key={tech.name}
-                    className="flex flex-col items-center gap-3 p-4 rounded border border-slate-800 bg-slate-900/60 hover:border-gold-400/30 transition-colors text-center"
+                    className="card-hover rounded bg-slate-900/60 flex flex-col items-center gap-3 p-4 text-center"
                   >
                     <div
-                      className="w-9 h-9 rounded flex items-center justify-center"
+                      className="icon-chip w-9 h-9"
                       style={{
                         background: `${tech.color}15`,
                         border: `1px solid ${tech.color}33`,
@@ -256,7 +245,7 @@ export default function AboutProject() {
             <div className="card p-6 flex flex-col gap-4 max-w-2xl">
               <div className="flex items-center gap-3">
                 <div
-                  className="w-10 h-10 rounded flex items-center justify-center"
+                  className="icon-chip w-10 h-10"
                   style={{
                     background: "#c8aa6e15",
                     border: "1px solid #c8aa6e33",
@@ -268,7 +257,7 @@ export default function AboutProject() {
                   <div className="font-display font-bold text-sm text-slate-100">
                     Riot Games API
                   </div>
-                  <div className="font-mono text-xs text-slate-500">
+                  <div className="mono-caption">
                     Account-V1 · League-V4 · Match-V5 · Summoner-V4 · Mastery-V4
                   </div>
                 </div>
@@ -282,7 +271,7 @@ export default function AboutProject() {
                     key={k}
                     className="flex items-center justify-between gap-4"
                   >
-                    <span className="font-mono text-xs text-slate-500 uppercase tracking-widest">
+                    <span className="fine-print text-xs text-slate-500">
                       {k}
                     </span>
                     <span className="font-mono text-xs text-slate-200 text-right">
@@ -308,9 +297,7 @@ export default function AboutProject() {
 
         {/* CTA */}
         <section className="max-w-5xl mx-auto px-4 py-14 text-center">
-          <div className="font-mono text-xs text-slate-500 uppercase tracking-[0.2em] mb-4">
-            Ready to explore?
-          </div>
+          <div className="eyebrow text-slate-500 mb-4">Ready to explore?</div>
           <h2 className="font-display font-bold text-2xl md:text-4xl text-slate-100 mb-6">
             Back to the <span className="text-gold-400">Rift</span>
           </h2>

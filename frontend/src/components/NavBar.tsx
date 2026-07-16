@@ -31,7 +31,7 @@ export default function NavBar({
         }}
         className="group flex items-center gap-2 whitespace-nowrap"
       >
-        <span className="w-2.5 h-2.5 rotate-45 bg-gold-400 group-hover:bg-gold-300 transition-colors flex-shrink-0" />
+        <span className="gold-diamond w-2.5 h-2.5 group-hover:bg-gold-300 transition-colors" />
         <span className="font-display font-bold text-gold-400 group-hover:text-slate-100 text-lg tracking-[0.2em] uppercase transition-colors">
           Rift Lens
         </span>

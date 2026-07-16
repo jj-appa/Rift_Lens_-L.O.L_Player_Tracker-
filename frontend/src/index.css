@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -52,6 +52,49 @@
   .avatar-placeholder {
     @apply bg-slate-800 border border-slate-700/60 rounded-full flex items-center justify-center flex-shrink-0;
   }
+
+  /* Compact icon chip with a caller-supplied background/border color (dynamic
+     per-item hex colors are set via inline style, not achievable in a utility class) */
+  .icon-chip {
+    @apply rounded flex items-center justify-center flex-shrink-0;
+  }
+
+  /* ── Brand mark (small rotated square used next to the "Rift Lens" wordmark) ── */
+  .gold-diamond {
+    @apply rotate-45 bg-gold-400 flex-shrink-0;
+  }
+
+  /* Small uppercase mono label used above section headings */
+  .eyebrow {
+    @apply font-mono text-xs text-gold-400 uppercase tracking-[0.2em];
+  }
+
+  /* Faint mono caption text — version tags, copyright lines, disclaimers */
+  .fine-print {
+    @apply font-mono text-[11px] text-slate-600 uppercase tracking-widest;
+  }
+
+  /* Plain (non-uppercase) mono caption — dates, endpoint strings */
+  .mono-caption {
+    @apply font-mono text-xs text-slate-500;
+  }
+
+  /* ── Form controls ── */
+  .select-gold {
+    @apply appearance-none bg-slate-800 hover:bg-slate-700 text-slate-100
+           font-semibold tracking-wide cursor-pointer text-base
+           focus:outline-none transition-colors;
+  }
+
+  .select-caret {
+    @apply pointer-events-none absolute right-2 text-slate-400 text-xs;
+  }
+
+  /* card + gold hover border, used for interactive/clickable card grids */
+  .card-hover {
+    @apply bg-slate-900/80 border border-slate-800 rounded-lg overflow-hidden
+           hover:border-gold-400/30 transition-colors;
+  }
 }
 
 /* ── Base resets ── */
@@ -68,7 +111,12 @@ body {
   font-size: 17px;
   letter-spacing: 0.3px;
   line-height: 1.5;
-  background: radial-gradient(circle at 20% -10%, #101a2e 0%, #060910 55%, #030509 100%);
+  background: radial-gradient(
+    circle at 20% -10%,
+    #101a2e 0%,
+    #060910 55%,
+    #030509 100%
+  );
   background-attachment: fixed;
   color: #dbe2ef;
 }

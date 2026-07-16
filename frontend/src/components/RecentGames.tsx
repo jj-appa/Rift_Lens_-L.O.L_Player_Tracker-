@@ -95,16 +95,16 @@ export default function RecentGames({ player }: RecentGamesProps) {
                 </span>
               </div>
               <div className="flex flex-col gap-0.5">
-                <p className="text-[13px] text-slate-400 tracking-wide">
+                <p className="stat-label">
                   <span className="text-slate-200 font-medium">{total}G</span>{" "}
                   <span className="text-teal-400">{wins}W</span>{" "}
                   <span className="text-red-400">{losses}L</span>
                 </p>
-                <p className="text-[13px] text-slate-400 tracking-wide">
+                <p className="stat-label">
                   {avgK} / <span className="text-red-400">{avgD}</span> / {avgA}
                 </p>
                 <p className="text-lg font-bold leading-tight">{kdaRatio} : 1</p>
-                <p className="text-[13px] text-slate-400 tracking-wide">Avg KDA</p>
+                <p className="stat-label">Avg KDA</p>
               </div>
             </div>
 
@@ -131,33 +131,33 @@ export default function RecentGames({ player }: RecentGamesProps) {
 
                     <div className="min-w-0 w-28 flex-shrink-0">
                       <p className="font-semibold text-sm truncate">{game.champion}</p>
-                      <p className="text-[13px] text-slate-400 uppercase tracking-wider truncate">{game.mode}</p>
+                      <p className="stat-label uppercase tracking-wider truncate">{game.mode}</p>
                     </div>
 
                     <div className="text-center flex-shrink-0 w-16">
                       <p className={`font-display text-base font-bold leading-tight ${ratioColor(ratio)}`}>
                         {ratio.toFixed(2)}
                       </p>
-                      <p className="text-[13px] text-slate-400 tracking-wide">
+                      <p className="stat-label">
                         {game.kda.k}/<span className="text-red-400">{game.kda.d}</span>/{game.kda.a}
                       </p>
                     </div>
 
                     <div className="text-center flex-shrink-0 w-14 hidden sm:block">
                       <p className="text-sm font-medium text-slate-200">{game.cs ?? "—"}</p>
-                      <p className="text-[12px] text-slate-400 uppercase tracking-wider">CS</p>
+                      <p className="stat-label text-[12px] uppercase tracking-wider">CS</p>
                     </div>
 
                     <div className="text-center flex-shrink-0 w-14 hidden sm:block">
                       <p className="text-sm font-medium text-slate-200">{fmtDmg(game.dmg)}</p>
-                      <p className="text-[12px] text-slate-400 uppercase tracking-wider">DMG</p>
+                      <p className="stat-label text-[12px] uppercase tracking-wider">DMG</p>
                     </div>
 
                     <div className="text-right flex-1 min-w-0">
                       <p className="text-sm text-slate-300 truncate">{game.duration}</p>
-                      <p className="text-[13px] text-slate-400 tracking-wide truncate">{game.timeAgo}</p>
+                      <p className="stat-label truncate">{game.timeAgo}</p>
                       {game.placement && (
-                        <p className="text-[13px] text-slate-500 tracking-wide truncate">{game.placement}</p>
+                        <p className="stat-label text-slate-500 truncate">{game.placement}</p>
                       )}
                     </div>
                   </div>
