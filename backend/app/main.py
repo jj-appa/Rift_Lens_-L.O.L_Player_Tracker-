@@ -149,6 +149,48 @@ async def get_player(
     }
 
 
+# Player Summoner Info (level, icon)
+@app.get("/api/summoner")
+async def get_summoner(
+    puuid: str = Query(..., description="Player Universal Unique Identifier (78 chars)"),
+    region: str = Query(..., description="Region code: NA1, EUW1, BR1, JP1, KR, or RU"),
+):
+    platform = PLATFORM_ROUTING.get(region.upper())
+    if not platform:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Unknown region '{region}'. Valid values: {list(PLATFORM_ROUTING.keys())}",
+        )
+
+    base_url = f"https://{platform}.api.riotgames.com"
+    headers = {"X-Riot-Token": RIOT_API_KEY}
+
+    try:
+        async with httpx.AsyncClient() as client:
+            resp = await client.get(
+                f"{base_url}/lol/summoner/v4/summoners/by-puuid/{puuid}",
+                headers=headers,
+            )
+            resp.raise_for_status()
+            data: dict = resp.json()
+
+    except httpx.HTTPStatusError as e:
+        status = e.response.status_code
+        if status == 404:
+            raise HTTPException(status_code=404, detail="Summoner not found on this platform")
+        if status == 401:
+            raise HTTPException(status_code=401, detail="Invalid or expired Riot API key")
+        raise HTTPException(status_code=502, detail=f"Riot API error: {status}")
+    except httpx.RequestError as e:
+        raise HTTPException(status_code=503, detail=f"Could not reach Riot API: {e}")
+
+    return {
+        "puuid": data["puuid"],
+        "summonerLevel": data["summonerLevel"],
+        "profileIconId": data["profileIconId"],
+    }
+
+
 # Player Current Ranked Info
 @app.get("/api/ranked")
 async def get_ranked_info(
@@ -279,6 +321,10 @@ async def get_match_details(
         "endOfGameResult": info.get("endOfGameResult"),
         "gameDuration": info["gameDuration"],
         "gameType": info["gameType"],
+        "gameMode": info["gameMode"],
+        "queueId": info["queueId"],
+        "gameStartTimestamp": info.get("gameStartTimestamp", info.get("gameCreation")),
+        "gameEndTimestamp": info.get("gameEndTimestamp"),
         "participants": [
             {
                 "puuid": p["puuid"],
@@ -286,6 +332,12 @@ async def get_match_details(
                 "kills": p["kills"],
                 "deaths": p["deaths"],
                 "assists": p["assists"],
+                "win": p["win"],
+                "totalMinionsKilled": p["totalMinionsKilled"],
+                "neutralMinionsKilled": p["neutralMinionsKilled"],
+                "totalDamageDealtToChampions": p["totalDamageDealtToChampions"],
+                "individualPosition": p.get("individualPosition"),
+                "subteamPlacement": p.get("subteamPlacement"),
             }
             for p in info["participants"]
         ],

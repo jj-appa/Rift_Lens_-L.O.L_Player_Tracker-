@@ -1,3 +1,4 @@
+import { Gamepad2 } from "lucide-react";
 import type { Player } from "../types/player";
 import RankCard from "./RankCard";
 import ChampionMastery from "./ChampionMastery";
@@ -14,10 +15,10 @@ export default function ProfileSidebar({ player, onShowMoreMastery }: ProfileSid
       <div className="card p-4 flex flex-col gap-3">
         <div className="flex items-center gap-3">
           <div className="relative">
-            <div className="w-16 h-16 rounded-xl bg-slate-800 border border-slate-700/60 flex items-center justify-center text-3xl select-none">
-              🎮
+            <div className="w-16 h-16 rounded-xl bg-slate-800 border border-slate-700/60 flex items-center justify-center select-none">
+              <Gamepad2 className="text-gold-400" size={30} />
             </div>
-            <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-slate-800 border border-slate-700/60 text-amber-400 text-xs px-2 rounded-md font-bold whitespace-nowrap">
+            <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-slate-800 border border-slate-700/60 text-gold-400 text-xs px-2 rounded-md font-bold whitespace-nowrap">
               {player.level}
             </span>
           </div>
@@ -25,15 +26,15 @@ export default function ProfileSidebar({ player, onShowMoreMastery }: ProfileSid
             <p className="font-display font-bold text-base leading-tight truncate tracking-wide">
               {player.name}
             </p>
-            <p className="text-slate-400 text-sm">#{player.tag}</p>
-            <p className="text-slate-500 text-xs">{player.region}</p>
+            <p className="text-slate-400 text-[15px] tracking-wide">#{player.tag}</p>
+            <p className="text-slate-400 text-[13px] tracking-wide">{player.region}</p>
           </div>
         </div>
 
-        <button className="btn-secondary w-20 mt-1">
+        <button className="w-20 mt-1 py-1.5 rounded-lg bg-gold-400 hover:bg-gold-300 active:bg-gold-500 text-slate-900 font-bold text-sm transition-colors">
           Update
         </button>
-        <p className="text-xs text-slate-600 text-center">
+        <p className="text-[13px] text-slate-500 tracking-wide text-center">
           Last updated: just now
         </p>
       </div>

@@ -14,7 +14,7 @@ export default function SectionTabs({ tabs, activeTab, onTabChange }: SectionTab
             onClick={() => onTabChange(tab)}
             className={`font-display px-4 py-3 text-sm font-semibold uppercase tracking-wider transition-colors border-b-2 -mb-px ${
               activeTab === tab
-                ? "border-amber-400 text-amber-400"
+                ? "border-gold-400 text-gold-400"
                 : "border-transparent text-slate-500 hover:text-slate-300"
             }`}
           >

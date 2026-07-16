@@ -6,8 +6,17 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Rajdhani', 'system-ui', 'sans-serif'],
+        sans: ['Rajdhani', 'system-ui', 'sans-serif'],
+        display: ['Cinzel', 'system-ui', 'serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+      },
+      colors: {
+        gold: {
+          300: '#d6bf92',
+          400: '#c8aa6e',
+          500: '#a08858',
+          600: '#826f48',
+        },
       },
     },
   },

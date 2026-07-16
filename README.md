@@ -25,13 +25,11 @@ Create or activate a Python virtual environment, then install dependencies:
 ```bash
 cd backend
 python -m venv venv | do this once
-venv\Scripts\activate
+venv\Scripts\activate | (deactivate -> to end)
 uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
 ## Next Steps
 
-- Connect the React frontend to the backend with `fetch` or a data library.
-- Replace sample routes with actual player lookup and match data endpoints.
 - Create Docker and containerize project
 - Set Up a basic CI/CD

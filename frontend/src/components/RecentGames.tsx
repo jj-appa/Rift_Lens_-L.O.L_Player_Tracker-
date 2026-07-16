@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { Bot, Clock } from "lucide-react";
 import type { Player } from "../types/player";
 
-const DEFAULT_SHOWN = 3;
+const DEFAULT_SHOWN = 5;
 const RADIUS = 28;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
@@ -11,7 +12,7 @@ function fmtDmg(n?: number) {
 }
 
 function ratioColor(ratio: number) {
-  if (ratio >= 6) return "text-amber-400";
+  if (ratio >= 6) return "text-gold-400";
   if (ratio >= 3) return "text-teal-400";
   return "text-slate-300";
 }
@@ -49,15 +50,15 @@ export default function RecentGames({ player }: RecentGamesProps) {
     <div className="card">
       <div className="card-body">
         <h2 className="card-section-header">
-          <span className="text-amber-400/80">🕐</span> Recent Games
+          <Clock className="text-gold-400" size={14} /> Recent Games
         </h2>
 
         {!hasGames ? (
           /* Empty state */
           <div className="flex flex-col items-center justify-center py-14 gap-3">
             <div className="relative">
-              <div className="w-16 h-16 bg-slate-700 rounded-full flex items-center justify-center text-4xl opacity-60">
-                🤖
+              <div className="w-16 h-16 bg-slate-700 rounded-full flex items-center justify-center opacity-60">
+                <Bot className="text-gold-400" size={32} />
               </div>
               <div className="absolute -top-1 -right-1 w-6 h-6 bg-slate-600 rounded-full flex items-center justify-center">
                 <span className="text-slate-400 font-bold text-xs leading-none">?</span>
@@ -94,24 +95,21 @@ export default function RecentGames({ player }: RecentGamesProps) {
                 </span>
               </div>
               <div className="flex flex-col gap-0.5">
-                <p className="text-xs text-slate-400">
+                <p className="text-[13px] text-slate-400 tracking-wide">
                   <span className="text-slate-200 font-medium">{total}G</span>{" "}
                   <span className="text-teal-400">{wins}W</span>{" "}
                   <span className="text-red-400">{losses}L</span>
                 </p>
-                <p className="text-xs text-slate-500">
+                <p className="text-[13px] text-slate-400 tracking-wide">
                   {avgK} / <span className="text-red-400">{avgD}</span> / {avgA}
                 </p>
                 <p className="text-lg font-bold leading-tight">{kdaRatio} : 1</p>
-                <p className="text-xs text-slate-400">Avg KDA</p>
+                <p className="text-[13px] text-slate-400 tracking-wide">Avg KDA</p>
               </div>
             </div>
 
             {/* Game list */}
-            <div
-              className="flex flex-col gap-2 overflow-hidden"
-              style={!expanded ? { maxHeight: `${DEFAULT_SHOWN * 68}px` } : undefined}
-            >
+            <div className="flex flex-col gap-2">
               {visible.map((game) => {
                 const isWin = game.result === "Victory";
                 const ratio = (game.kda.k + game.kda.a) / Math.max(game.kda.d, 1);
@@ -131,39 +129,35 @@ export default function RecentGames({ player }: RecentGamesProps) {
                       {isWin ? "W" : "L"}
                     </span>
 
-                    <div className="w-10 h-10 bg-slate-800 border border-slate-700/60 rounded-md flex items-center justify-center text-xl flex-shrink-0">
-                      🐱
-                    </div>
-
                     <div className="min-w-0 w-28 flex-shrink-0">
                       <p className="font-semibold text-sm truncate">{game.champion}</p>
-                      <p className="text-xs text-slate-500 uppercase tracking-wide truncate">{game.mode}</p>
+                      <p className="text-[13px] text-slate-400 uppercase tracking-wider truncate">{game.mode}</p>
                     </div>
 
                     <div className="text-center flex-shrink-0 w-16">
                       <p className={`font-display text-base font-bold leading-tight ${ratioColor(ratio)}`}>
                         {ratio.toFixed(2)}
                       </p>
-                      <p className="text-xs text-slate-500">
+                      <p className="text-[13px] text-slate-400 tracking-wide">
                         {game.kda.k}/<span className="text-red-400">{game.kda.d}</span>/{game.kda.a}
                       </p>
                     </div>
 
                     <div className="text-center flex-shrink-0 w-14 hidden sm:block">
                       <p className="text-sm font-medium text-slate-200">{game.cs ?? "—"}</p>
-                      <p className="text-[10px] text-slate-500 uppercase tracking-wide">CS</p>
+                      <p className="text-[12px] text-slate-400 uppercase tracking-wider">CS</p>
                     </div>
 
                     <div className="text-center flex-shrink-0 w-14 hidden sm:block">
                       <p className="text-sm font-medium text-slate-200">{fmtDmg(game.dmg)}</p>
-                      <p className="text-[10px] text-slate-500 uppercase tracking-wide">DMG</p>
+                      <p className="text-[12px] text-slate-400 uppercase tracking-wider">DMG</p>
                     </div>
 
                     <div className="text-right flex-1 min-w-0">
                       <p className="text-sm text-slate-300 truncate">{game.duration}</p>
-                      <p className="text-xs text-slate-500 truncate">{game.timeAgo}</p>
+                      <p className="text-[13px] text-slate-400 tracking-wide truncate">{game.timeAgo}</p>
                       {game.placement && (
-                        <p className="text-xs text-slate-600 truncate">{game.placement}</p>
+                        <p className="text-[13px] text-slate-500 tracking-wide truncate">{game.placement}</p>
                       )}
                     </div>
                   </div>
