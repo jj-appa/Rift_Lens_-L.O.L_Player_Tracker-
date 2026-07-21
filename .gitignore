@@ -140,10 +140,13 @@ dist
 # Vite files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+frontend/vite.config.js
+frontend/vite.config.d.ts
 .vite/
 
 # Workspace-specific folders
 frontend/node_modules/
-backend/python/__pycache__/
-backend/python/**/*.pyc
-backend/python/venv/
+__pycache__/
+*.pyc
+backend/venv/
+.venv/
