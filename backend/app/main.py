@@ -49,9 +49,13 @@ def split_riot_id(raw: str) -> tuple[str, str]:
 
 app = FastAPI(title="Rift Lens API")
 
+# defaults to the Vite dev server; override with a comma-separated list (e.g. in
+# docker-compose) to also allow the dockerized/nginx-served frontend's origin
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=allowed_origins,
     allow_methods=["GET"],
     allow_headers=["*"],
 )
