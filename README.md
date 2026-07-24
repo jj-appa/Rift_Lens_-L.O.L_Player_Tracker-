@@ -31,5 +31,6 @@ uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 
 ## Next Steps
 
-- Create Docker and containerize project
-- Set Up a basic CI/CD
+- Add api endpoint for CI/CD
+- Implement Update newly fetch data api
+- Implement Rate limiter
