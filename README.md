@@ -1,36 +1,32 @@
 # Rift Lens
 
-League of Legends player tracker
+A League of Legends player tracker — a summoner analytics dashboard built on the Riot Games API. Designed to surface the data that matters: ranked standing, champion mastery, and match-level breakdowns.
 
-## Project Structure
+## ℹ️ Project Structure
 
-- `frontend/` — React + TypeScript app scaffolded with Vite.
-- `backend/python/` — FastAPI backend starter with Python requirements.
+- `frontend/` — React + TypeScript app (Vite)
+- `backend/` — FastAPI backend
 
-## Setup
+Tech Stack
 
-### Frontend
+- React 18 | UI Framework
+- TypeScript | Type Safety
+- FastAPI | Backend API
+- Riot Games API | Data Source
+- Tailwind CSS | Styling
+- Docker | Containerization
+- CI/CD | Automated Pipeline
 
-```bash
-cd frontend
-npm run dev
-```
+## 🌟 Next Steps
 
-### Python backend
+Things I want to implement next:
 
-Create or activate a Python virtual environment, then install dependencies:
+- Add an API endpoint for CI/CD
+- Refresh cached data automatically instead of only on request
+- Add rate limiting
 
-- to install dependencies pip install -r requirements.txt
+## 🏆 Sites that inspire me
 
-```bash
-cd backend
-python -m venv venv | do this once
-venv\Scripts\activate | (deactivate -> to end)
-uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
-```
-
-## Next Steps
-
-- Add api endpoint for CI/CD
-- Implement Update newly fetch data api
-- Implement Rate limiter
+- op.gg
+- mobalytics.gg
+- tracker.gg

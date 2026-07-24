@@ -149,3 +149,6 @@ frontend/node_modules/
 __pycache__/
 *.pyc
 .venv/
+
+#docker
+docker.md
